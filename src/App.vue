@@ -1,9 +1,26 @@
 <template>
   <div id="app">
-    <button class="btn">Test</button>
-    <router-view/>
+    <component :is="layout">
+      <router-view/>
+    </component>
   </div>
 </template>
+
+<script>
+import MainLayout from '@/layouts/MainLayout.vue';
+import EmptyLayout from '@/layouts/EmptyLayout.vue';
+
+export default {
+  components: { MainLayout, EmptyLayout },
+  computed: {
+    layout() {
+      const layoutName = this.$route.meta.layout || 'empty';
+
+      return `${layoutName}-layout`;
+    },
+  },
+};
+</script>
 
 <style>
 @import '~materialize-css/dist/css/materialize.min.css';
