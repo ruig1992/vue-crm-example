@@ -6,7 +6,6 @@
         <input
             id="email"
             type="text"
-            class="validate"
         >
         <label for="email">Email</label>
         <small class="helper-text invalid">Email</small>
@@ -20,6 +19,21 @@
         <label for="password">Пароль</label>
         <small class="helper-text invalid">Password</small>
       </div>
+      <div class="input-field">
+        <input
+            id="name"
+            type="text"
+            class="validate"
+        >
+        <label for="name">Ім'я</label>
+        <small class="helper-text invalid">Name</small>
+      </div>
+      <p>
+        <label>
+          <input type="checkbox" />
+          <span>З правилами згоден</span>
+        </label>
+      </p>
     </div>
     <div class="card-action">
       <div>
@@ -27,14 +41,14 @@
             class="btn waves-effect waves-light auth-submit"
             type="submit"
         >
-          Увійти
+          Зареєструватися
           <i class="material-icons right">send</i>
         </button>
       </div>
 
       <p class="center">
-        Немає аккаунта?
-        <router-link :to="{ name: 'Register' }">Зареєструватися</router-link>
+        Вже є аккаунт?
+        <router-link :to="{ name: 'Home' }">Увійти!</router-link>
       </p>
     </div>
   </form>
@@ -42,6 +56,6 @@
 
 <script>
 export default {
-  name: 'Login',
+  name: 'Register',
 };
 </script>
