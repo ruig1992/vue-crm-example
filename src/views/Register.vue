@@ -88,7 +88,7 @@
 
       <p class="center">
         Вже є аккаунт?
-        <router-link :to="{ name: 'Home' }">Увійти!</router-link>
+        <router-link :to="{ name: 'Login' }">Увійти!</router-link>
       </p>
     </div>
   </form>
