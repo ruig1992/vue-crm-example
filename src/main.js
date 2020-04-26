@@ -5,7 +5,11 @@ import router from './router';
 import store from './store';
 import 'materialize-css/dist/js/materialize.min';
 
+import formatDate from './filters/date.filter';
+
 Vue.config.productionTip = false;
+
+Vue.filter('date', formatDate);
 
 new Vue({
   router,

@@ -5,7 +5,7 @@
         <a href="#" @click.prevent="$emit('toggleSidebar')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">12.12.12</span>
+        <span class="black-text">{{ currentDate | date() }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
@@ -41,8 +41,22 @@
 <script>
 export default {
   name: 'Navbar',
+  data: () => ({
+    currentDate: new Date(),
+    dateInterval: null,
+    dropdown: null,
+  }),
   mounted() {
-    window.M.Dropdown.init(this.$refs.dropdownTrigger, {});
+    this.dateInterval = setInterval(() => {
+      this.currentDate = new Date();
+    }, 1000);
+    this.dropdown = window.M.Dropdown.init(this.$refs.dropdownTrigger, {});
+  },
+  beforeDestroy() {
+    clearInterval(this.dateInterval);
+    if (this.dropdown && this.dropdown.destroy) {
+      this.dropdown.destroy();
+    }
   },
   methods: {
     logout() {
