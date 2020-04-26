@@ -42,7 +42,10 @@
         >Рахунок</router-link>
       </li>
       <li>
-        <a href="#" class="waves-effect waves-orange pointer">Історія</a>
+        <router-link :to="{ name: 'History' }"
+          class="waves-effect waves-orange pointer"
+          exact
+        >Історія</router-link>
       </li>
       <li>
         <a href="#" class="waves-effect waves-orange pointer">Планування</a>
