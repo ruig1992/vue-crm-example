@@ -5,11 +5,13 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import formatDate from './filters/date.filter';
+import messagePlugin from './utils/message.utils';
 import 'materialize-css/dist/js/materialize.min';
 
 Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);
+Vue.use(messagePlugin);
 Vue.filter('date', formatDate);
 
 new Vue({

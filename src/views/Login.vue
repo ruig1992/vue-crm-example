@@ -58,6 +58,7 @@
 
 <script>
 import { required, email, minLength } from 'vuelidate/lib/validators';
+import messages from '@/utils/messages';
 
 export default {
   name: 'Login',
@@ -74,6 +75,12 @@ export default {
       required,
       minLength: minLength(4),
     },
+  },
+  mounted() {
+    const msgKey = (this.$route.query.message || '').trim();
+    if (messages[msgKey]) {
+      this.$showMsg(messages[msgKey]);
+    }
   },
   methods: {
     onSubmit() {
