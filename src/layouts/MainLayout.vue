@@ -19,13 +19,13 @@
             <ul id='dropdown' class='dropdown-content'>
               <li>
                 <a href="#" class="black-text">
-                  <i class="material-icons">account_circle</i>Профиль
+                  <i class="material-icons">account_circle</i>Профіль
                 </a>
               </li>
               <li class="divider" tabindex="-1"></li>
               <li>
                 <a href="#" class="black-text">
-                  <i class="material-icons">assignment_return</i>Выйти
+                  <i class="material-icons">assignment_return</i>Вийти
                 </a>
               </li>
             </ul>
@@ -36,19 +36,25 @@
 
     <ul class="sidenav app-sidenav open">
       <li>
-        <a href="#" class="waves-effect waves-orange pointer">Счет</a>
+        <router-link :to="{ name: 'Home' }"
+          class="waves-effect waves-orange pointer"
+          exact
+        >Рахунок</router-link>
       </li>
       <li>
-        <a href="#" class="waves-effect waves-orange pointer">История</a>
+        <a href="#" class="waves-effect waves-orange pointer">Історія</a>
       </li>
       <li>
-        <a href="#" class="waves-effect waves-orange pointer">Планирование</a>
+        <a href="#" class="waves-effect waves-orange pointer">Планування</a>
       </li>
       <li>
-        <a href="#" class="waves-effect waves-orange pointer">Новая запись</a>
+        <a href="#" class="waves-effect waves-orange pointer">Новий запис</a>
       </li>
       <li>
-        <a href="#" class="waves-effect waves-orange pointer">Категории</a>
+        <router-link :to="{ name: 'Categories' }"
+          class="waves-effect waves-orange pointer"
+          exact
+        >Категорії</router-link>
       </li>
     </ul>
 
