@@ -10,7 +10,11 @@
 
       <ul class="right hide-on-small-and-down">
         <li>
-          <a class="dropdown-trigger black-text" href="#" data-target="dropdown">
+          <a href="#"
+            class="dropdown-trigger black-text"
+            data-target="dropdown"
+            ref="dropdownTrigger"
+          >
             USER NAME
             <i class="material-icons right">arrow_drop_down</i>
           </a>
@@ -23,7 +27,7 @@
             </li>
             <li class="divider" tabindex="-1"></li>
             <li>
-              <a href="#" class="black-text">
+              <a href="#" class="black-text" @click.prevent="logout">
                 <i class="material-icons">assignment_return</i>Вийти
               </a>
             </li>
@@ -37,5 +41,14 @@
 <script>
 export default {
   name: 'Navbar',
+  mounted() {
+    window.M.Dropdown.init(this.$refs.dropdownTrigger, {});
+  },
+  methods: {
+    logout() {
+      console.log('Logout');
+      this.$router.push('/login?message=logout');
+    },
+  },
 };
 </script>
