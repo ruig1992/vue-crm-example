@@ -10,6 +10,14 @@ const metaDefaultLayout = {
 
 const routes = [
   {
+    path: '/',
+    name: 'Home',
+    component: Home,
+    meta: {
+      ...metaDefaultLayout,
+    },
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('../views/Login.vue'),
@@ -20,9 +28,9 @@ const routes = [
     component: () => import('../views/Register.vue'),
   },
   {
-    path: '/',
-    name: 'Home',
-    component: Home,
+    path: '/profile',
+    name: 'Profile',
+    component: () => import('../views/Profile.vue'),
     meta: {
       ...metaDefaultLayout,
     },

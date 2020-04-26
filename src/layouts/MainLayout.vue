@@ -16,11 +16,11 @@
               <i class="material-icons right">arrow_drop_down</i>
             </a>
 
-            <ul id='dropdown' class='dropdown-content'>
+            <ul id="dropdown" class="dropdown-content">
               <li>
-                <a href="#" class="black-text">
+                <router-link :to="{ name: 'Profile' }" class="black-text">
                   <i class="material-icons">account_circle</i>Профіль
-                </a>
+                </router-link>
               </li>
               <li class="divider" tabindex="-1"></li>
               <li>
