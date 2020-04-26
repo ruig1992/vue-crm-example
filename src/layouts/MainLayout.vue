@@ -54,7 +54,10 @@
         >Планування</router-link>
       </li>
       <li>
-        <a href="#" class="waves-effect waves-orange pointer">Новий запис</a>
+        <router-link :to="{ name: 'NewRecord' }"
+          class="waves-effect waves-orange pointer"
+          exact
+        >Новий запис</router-link>
       </li>
       <li>
         <router-link :to="{ name: 'Categories' }"
