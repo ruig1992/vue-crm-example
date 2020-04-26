@@ -48,7 +48,10 @@
         >Історія</router-link>
       </li>
       <li>
-        <a href="#" class="waves-effect waves-orange pointer">Планування</a>
+        <router-link :to="{ name: 'Planning' }"
+          class="waves-effect waves-orange pointer"
+          exact
+        >Планування</router-link>
       </li>
       <li>
         <a href="#" class="waves-effect waves-orange pointer">Новий запис</a>
