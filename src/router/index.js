@@ -68,14 +68,6 @@ const routes = [
     },
   },
   {
-    path: '/new-record',
-    name: 'NewRecord',
-    component: () => import('../views/NewRecord.vue'),
-    meta: {
-      ...metaDefaultLayout,
-    },
-  },
-  {
     path: '/detail-record',
     name: 'DetailRecord',
     component: () => import('../views/DetailRecord.vue'),
