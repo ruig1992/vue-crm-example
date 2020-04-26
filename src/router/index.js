@@ -54,6 +54,22 @@ const routes = [
       ...metaDefaultLayout,
     },
   },
+  {
+    path: '/new-record',
+    name: 'NewRecord',
+    component: () => import('../views/NewRecord.vue'),
+    meta: {
+      ...metaDefaultLayout,
+    },
+  },
+  {
+    path: '/detail-record',
+    name: 'DetailRecord',
+    component: () => import('../views/DetailRecord.vue'),
+    meta: {
+      ...metaDefaultLayout,
+    },
+  },
   // route level code-splitting
   // this generates a separate chunk (about.[hash].js) for this route
   // which is lazy-loaded when the route is visited.
