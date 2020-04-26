@@ -1,7 +1,7 @@
 <template>
   <form class="card auth-card">
     <div class="card-content">
-      <span class="card-title">Домашняя бухгалтерия</span>
+      <span class="card-title">Домашня бухгалтерія</span>
       <div class="input-field">
         <input
             id="email"
@@ -27,14 +27,14 @@
             class="btn waves-effect waves-light auth-submit"
             type="submit"
         >
-          Войти
+          Увійти
           <i class="material-icons right">send</i>
         </button>
       </div>
 
       <p class="center">
-        Нет аккаунта?
-        <a href="/">Зарегистрироваться</a>
+        Немає аккаунта?
+        <a href="/">Зареєструватися</a>
       </p>
     </div>
   </form>
