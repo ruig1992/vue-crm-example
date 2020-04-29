@@ -55,8 +55,8 @@
 
         <small
           class="helper-text invalid"
-          v-if="$v.username.$error && !$v.username.alphaNum"
-        >Username accepts only alphanumerics</small>
+          v-if="$v.username.$error && $v.username.required && !$v.username.alphaNumExtra"
+        >Username accepts only letters, numbers with spaces</small>
       </div>
 
       <div>
@@ -78,8 +78,9 @@
     <div class="card-action">
       <div>
         <button
-            class="btn waves-effect waves-light auth-submit"
-            type="submit"
+          class="btn waves-effect waves-light auth-submit"
+          type="submit"
+          :disabled="isLoading"
         >
           Зареєструватися
           <i class="material-icons right">send</i>
@@ -96,12 +97,11 @@
 
 <script>
 import {
-  required,
-  email,
-  minLength,
-  alphaNum,
-  sameAs,
+  required, email, minLength, sameAs,
 } from 'vuelidate/lib/validators';
+import { msgAuth } from '@/utils/messages';
+
+const alphaNumExtra = (value) => /^[a-zа-яА-ЯєЄіІїЇґҐ\d '’]+$/i.test(value);
 
 export default {
   name: 'Register',
@@ -111,42 +111,40 @@ export default {
     username: '',
     rightsAgreement: false,
   }),
-  validations: {
-    email: {
-      required,
-      email,
+  computed: {
+    isLoading() {
+      return this.$store.state.loading;
     },
-    password: {
-      required,
-      minLength: minLength(4),
-    },
-    username: {
-      required,
-      minLength: minLength(4),
-      alphaNum,
-    },
-    rightsAgreement: {
-      sameAs: sameAs(() => true),
+    authError() {
+      return this.$store.getters.error;
     },
   },
+  validations: {
+    email: { required, email },
+    password: { required, minLength: minLength(6) },
+    username: { required, minLength: minLength(4), alphaNumExtra },
+    rightsAgreement: { sameAs: sameAs(() => true) },
+  },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       this.$v.$touch();
-
       if (this.$v.$invalid) {
-        console.error('Form is invalid!');
         return;
       }
 
-      const formData = {
+      await this.$store.dispatch('register', {
         email: this.email,
         password: this.password,
         username: this.username,
         rightsAgreement: this.rightsAgreement,
-      };
+      });
 
-      console.log(formData);
-      // this.$router.push('/');
+      if (this.authError.status) {
+        this.$notify.error(msgAuth[this.authError.code]);
+        return;
+      }
+
+      this.$router.push('/');
     },
   },
 };

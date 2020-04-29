@@ -15,7 +15,7 @@
             data-target="dropdown"
             ref="dropdownTrigger"
           >
-            USER NAME
+            {{ userName }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
@@ -46,11 +46,16 @@ export default {
     dateInterval: null,
     dropdown: null,
   }),
+  computed: {
+    userName() {
+      return this.$store.getters.user.info.name;
+    },
+  },
   mounted() {
     this.dateInterval = setInterval(() => {
       this.currentDate = new Date();
     }, 1000);
-    this.dropdown = window.M.Dropdown.init(this.$refs.dropdownTrigger, {});
+    this.dropdown = window.M.Dropdown.init(this.$refs.dropdownTrigger);
   },
   beforeDestroy() {
     clearInterval(this.dateInterval);
@@ -60,8 +65,10 @@ export default {
   },
   methods: {
     logout() {
-      console.log('Logout');
-      this.$router.push('/login?message=logout');
+      this.$store.dispatch('logout')
+        .then(() => {
+          this.$router.push('/login?message=logout');
+        });
     },
   },
 };

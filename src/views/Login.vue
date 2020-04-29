@@ -40,8 +40,9 @@
     <div class="card-action">
       <div>
         <button
-            class="btn waves-effect waves-light auth-submit"
-            type="submit"
+          class="btn waves-effect waves-light auth-submit"
+          type="submit"
+          :disabled="isLoading"
         >
           Увійти
           <i class="material-icons right">send</i>
@@ -58,7 +59,7 @@
 
 <script>
 import { required, email, minLength } from 'vuelidate/lib/validators';
-import messages from '@/utils/messages';
+import { msgAuth } from '@/utils/messages';
 
 export default {
   name: 'Login',
@@ -66,37 +67,39 @@ export default {
     email: '',
     password: '',
   }),
+  computed: {
+    isLoading() {
+      return this.$store.state.loading;
+    },
+    authError() {
+      return this.$store.getters.error;
+    },
+  },
   validations: {
-    email: {
-      required,
-      email,
-    },
-    password: {
-      required,
-      minLength: minLength(4),
-    },
+    email: { required, email },
+    password: { required, minLength: minLength(6) },
   },
   mounted() {
     const msgKey = (this.$route.query.message || '').trim();
-    if (messages[msgKey]) {
-      this.$showMsg(messages[msgKey]);
-    }
+    this.$notify.show(msgAuth[msgKey]);
   },
   methods: {
-    onSubmit() {
+    async onSubmit() {
       this.$v.$touch();
-
       if (this.$v.$invalid) {
-        console.error('Form is invalid!');
         return;
       }
 
-      const formData = {
+      await this.$store.dispatch('login', {
         email: this.email,
         password: this.password,
-      };
+      });
 
-      console.log(formData);
+      if (this.authError.status) {
+        this.$notify.error(msgAuth[this.authError.code]);
+        return;
+      }
+
       this.$router.push('/');
     },
   },
