@@ -15,7 +15,7 @@
             data-target="dropdown"
             ref="dropdownTrigger"
           >
-            {{ userName }}
+            {{ userName | strCase() }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
