@@ -1,15 +1,14 @@
-// eslint-disable-next-line func-names
-const msg = function (html, options) {
+const msg = (html, options) => {
   if (!html) {
     return;
   }
   window.M.toast({
+    displayLength: 1200,
     ...options,
     html,
   });
 };
 
-/* eslint-disable no-param-reassign */
 export default {
   install(Vue) {
     Vue.prototype.$notify = {
@@ -18,6 +17,7 @@ export default {
       },
       error(html, options) {
         msg(`[Error]: ${html}`, {
+          displayLength: 3000,
           ...options,
           classes: 'error',
         });

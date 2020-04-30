@@ -42,10 +42,12 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    resetError({ commit }) {
+      commit('setError', { ...INIT_STATE.error });
+    },
     async register({ commit }, payload) {
       try {
         commit('setLoading', true);
-        commit('setError', { ...INIT_STATE.error });
 
         const userCredential = await firebase.auth()
           .createUserWithEmailAndPassword(
@@ -75,7 +77,6 @@ export default new Vuex.Store({
     async login({ commit }, payload) {
       try {
         commit('setLoading', true);
-        commit('setError', { ...INIT_STATE.error });
 
         const userCredential = await firebase.auth()
           .signInWithEmailAndPassword(
@@ -125,7 +126,6 @@ export default new Vuex.Store({
     async updateProfile({ commit, getters }, payload) {
       try {
         commit('setLoading', true);
-        commit('setError', { ...INIT_STATE.error });
 
         const { user } = getters;
         const userInfo = {

@@ -74,9 +74,15 @@ export default {
         username: this.username,
       });
 
-      if (this.error.status) {
+      /* if (this.error.status) {
         this.$notify.error(`(${this.error.code}) ${this.error.message}`);
-      }
+
+        this.$notify.error(msgAuth[this.authError.code], {
+          completeCallback: () => {
+            this.$store.dispatch('resetError');
+          },
+        });
+      } */
     },
   },
 };

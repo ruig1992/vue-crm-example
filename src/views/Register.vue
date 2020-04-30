@@ -140,7 +140,11 @@ export default {
       });
 
       if (this.authError.status) {
-        this.$notify.error(msgAuth[this.authError.code]);
+        this.$notify.error(msgAuth[this.authError.code], {
+          completeCallback: () => {
+            this.$store.dispatch('resetError');
+          },
+        });
         return;
       }
 
