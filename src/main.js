@@ -35,13 +35,7 @@ const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
     render: (h) => h(App),
     async created() {
       if (user) {
-        const userInfo = await firebase.database()
-          .ref(`users/${user.uid}/info`).once('value');
-
-        store.dispatch('autoLogin', {
-          ...user,
-          userInfo: userInfo.val(),
-        });
+        store.dispatch('autoLogin', { ...user });
       }
     },
   }).$mount('#app');

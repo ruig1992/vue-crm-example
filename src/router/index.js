@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import firebase from 'firebase/app';
+import AuthService from '@/services/auth.service';
 
 Vue.use(VueRouter);
 
@@ -74,7 +74,7 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   const requiresGuest = to.matched.some((record) => record.meta.requiresGuest);
 
-  const isAuthenticated = !!firebase.auth().currentUser;
+  const isAuthenticated = AuthService.isAuthenticated();
 
   if (requiresAuth && !isAuthenticated) {
     next('/login');
