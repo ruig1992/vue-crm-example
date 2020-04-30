@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Vuelidate from 'vuelidate';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
 
@@ -17,7 +17,6 @@ import Notification from './utils/notification.utils';
 import firebaseConfig from './config/firebase.config';
 
 import 'materialize-css/dist/js/materialize.min';
-
 
 Vue.config.productionTip = false;
 

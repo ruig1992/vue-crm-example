@@ -1,14 +1,14 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import * as firebase from 'firebase/app';
+import firebase from 'firebase/app';
 
 Vue.use(Vuex);
 
 const INIT_STATE = {
-  user: { uid: null, email: '', info: { name: '', bill: 0 } },
-  isLoggedIn: false,
   loading: false,
+  isLoggedIn: false,
   error: { status: false, code: '', message: '' },
+  user: { uid: null, email: '', info: { name: '', bill: 0 } },
 };
 
 export default new Vuex.Store({
