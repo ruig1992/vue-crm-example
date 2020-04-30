@@ -20,6 +20,12 @@ export default new Vuex.Store({
       state.user = payload;
       state.isLoggedIn = true;
     },
+    updateInfo(state, payload) {
+      state.user = {
+        ...state.user,
+        info: payload,
+      };
+    },
     setLoading(state, payload) {
       state.loading = payload;
     },
@@ -85,7 +91,7 @@ export default new Vuex.Store({
         commit('setUser', {
           uid: user.uid,
           email: user.email,
-          info: { name: infoData.name, bill: infoData.bill },
+          info: { ...infoData },
         });
       } catch (error) {
         commit('setError', error);
@@ -110,11 +116,33 @@ export default new Vuex.Store({
       commit('setUser', {
         uid: payload.uid,
         email: payload.email,
-        info: {
-          name: payload.userInfo.name,
-          bill: payload.userInfo.bill,
-        },
+        info: { ...payload.userInfo },
       });
+    },
+    getCurrentUser() {
+      return firebase.auth().currentUser;
+    },
+    async updateProfile({ commit, getters }, payload) {
+      try {
+        commit('setLoading', true);
+        commit('setError', { ...INIT_STATE.error });
+
+        const { user } = getters;
+        const userInfo = {
+          ...user.info,
+          name: payload.username,
+        };
+
+        await firebase.database()
+          .ref(`users/${user.uid}/info`).set({ ...userInfo });
+
+        commit('updateInfo', { ...userInfo });
+      } catch (error) {
+        // commit('setError', error);
+        console.error(error);
+      } finally {
+        commit('setLoading', false);
+      }
     },
   },
   getters: {
