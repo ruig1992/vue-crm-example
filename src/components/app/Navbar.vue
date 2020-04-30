@@ -5,7 +5,7 @@
         <a href="#" @click.prevent="$emit('toggleSidebar')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{ currentDate | date() }}</span>
+        <span class="black-text">{{ currentDate | date('datetime') }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
@@ -64,11 +64,9 @@ export default {
     }
   },
   methods: {
-    logout() {
-      this.$store.dispatch('logout')
-        .then(() => {
-          this.$router.push('/login?message=logout');
-        });
+    async logout() {
+      await this.$store.dispatch('logout');
+      this.$router.push('/login?message=logout');
     },
   },
 };

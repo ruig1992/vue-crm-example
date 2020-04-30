@@ -100,18 +100,12 @@ export default new Vuex.Store({
         commit('setLoading', false);
       }
     },
-    logout({ commit }) {
-      return new Promise((resolve) => {
-        commit('setLoading', true);
-        firebase.auth().signOut()
-          .then(() => {
-            commit('setUser', {
-              ...INIT_STATE.user,
-            });
-            commit('setLoading', false);
-            resolve();
-          });
-      });
+    async logout({ commit }) {
+      commit('setLoading', true);
+      await firebase.auth().signOut();
+
+      commit('setUser', { ...INIT_STATE.user });
+      commit('setLoading', false);
     },
     autoLogin({ commit }, payload) {
       commit('setUser', {
