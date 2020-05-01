@@ -9,5 +9,5 @@ export default function (value, currencyCode = 'UAH') {
     currencyDisplay: 'symbol',
   };
 
-  return new Intl.NumberFormat('uk', options).format(value);
+  return new Intl.NumberFormat('uk-UA', options).format(value);
 }
