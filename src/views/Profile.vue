@@ -50,13 +50,9 @@ export default {
   data() {
     return {
       name: this.$store.getters.info.name,
-      isFirstSetting: true,
     };
   },
   computed: {
-    userName() {
-      return this.$store.getters.info.name;
-    },
     isLoading() {
       return this.$store.getters.loading;
     },
@@ -64,21 +60,11 @@ export default {
       return this.$store.getters.error;
     },
   },
-  watch: {
-    userName(val) {
-      if (this.isFirstSetting) {
-        this.name = val;
-        this.isFirstSetting = false;
-      }
-    },
-  },
   validations: {
     name: { required, minLength: minLength(4), alphaNumExtra },
   },
   methods: {
     async onSubmit() {
-      this.isFirstSetting = false;
-
       this.$v.$touch();
       if (this.$v.$invalid) {
         return;
