@@ -1,4 +1,8 @@
 export default function (value, currencyCode = 'UAH') {
+  if (!value) {
+    return null;
+  }
+
   const options = {
     style: 'currency',
     currency: currencyCode,
