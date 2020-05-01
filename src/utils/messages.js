@@ -1,4 +1,4 @@
-const msgAuth = {
+export const msgAuth = {
   logout: 'Logout was successfully!',
   'auth/email-already-in-use': 'This email is already in use!',
   'auth/invalid-email': 'Invalid e-mail!',
@@ -8,6 +8,7 @@ const msgAuth = {
   'auth/user-disabled': 'The user with this credentials was disabled!',
   'auth/operation-not-allowed': 'The operation is not allowed on the server!',
 };
-const msgExample = {};
 
-export { msgAuth, msgExample };
+export const msgCurrency = {
+  exchange_rate_err: 'Could not get the latest exchange rate data!',
+};
