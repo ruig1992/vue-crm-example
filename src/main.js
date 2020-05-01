@@ -9,7 +9,8 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 
-import Loader from './components/app/Loader.vue';
+import CircularLoader from './components/app/Loader/Circular.vue';
+import ProgressLoader from './components/app/Loader/Progress.vue';
 
 import formatDate from './filters/date.filter';
 import formatCurrency from './filters/currency.filter';
@@ -24,7 +25,8 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);
 Vue.use(Notification);
-Vue.component('Loader', Loader);
+Vue.component('CircularLoader', CircularLoader);
+Vue.component('ProgressLoader', ProgressLoader);
 Vue.filter('date', formatDate);
 Vue.filter('currency', formatCurrency);
 Vue.filter('strCase', strCase);

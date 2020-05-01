@@ -12,7 +12,7 @@
       </button>
     </div>
 
-    <Loader v-if="!isRatesLoaded" />
+    <CircularLoader v-if="!isRatesLoaded" />
 
     <div v-else class="row">
       <div class="col s12 m6 l4">

@@ -16,6 +16,6 @@
 
 <script>
 export default {
-  name: 'Loader',
+  name: 'CircularLoader',
 };
 </script>
