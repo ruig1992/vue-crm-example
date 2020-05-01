@@ -49,13 +49,13 @@ export default {
   name: 'Profile',
   data() {
     return {
-      name: this.$store.getters.user.info.name,
+      name: this.$store.getters.info.name,
       isFirstSetting: true,
     };
   },
   computed: {
     userName() {
-      return this.$store.getters.user.info.name;
+      return this.$store.getters.info.name;
     },
     isLoading() {
       return this.$store.getters.loading;
@@ -84,8 +84,8 @@ export default {
         return;
       }
 
-      await this.$store.dispatch('updateProfile', {
-        username: this.name,
+      await this.$store.dispatch('updateInfo', {
+        name: this.name,
       });
 
       /* if (this.error.status) {

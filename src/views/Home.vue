@@ -15,7 +15,7 @@
             <span class="card-title">Рахунок у валюті</span>
 
             <p class="currency-line">
-              <span>{{ getUserBillValue | currency() }}</span>
+              <span>{{ infoBill | currency() }}</span>
             </p>
           </div>
         </div>
@@ -55,8 +55,8 @@
 export default {
   name: 'Home',
   computed: {
-    getUserBillValue() {
-      return this.$store.getters.user.info.bill;
+    infoBill() {
+      return this.$store.getters.info.bill;
     },
   },
 };

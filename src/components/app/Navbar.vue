@@ -48,7 +48,7 @@ export default {
   }),
   computed: {
     userName() {
-      return this.$store.getters.user.info.name;
+      return this.$store.getters.info.name;
     },
   },
   mounted() {

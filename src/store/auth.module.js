@@ -3,7 +3,7 @@ import UserService from '@/services/user.service';
 
 const INIT_STATE = {
   isLoggedIn: false,
-  user: { uid: null, email: '', info: { name: '', bill: 0 } },
+  user: { uid: null, email: '' },
 };
 
 export default {
@@ -13,8 +13,9 @@ export default {
       state.user = payload;
       state.isLoggedIn = true;
     },
-    updateInfo(state, payload) {
-      state.user = { ...state.user, info: payload };
+    clearUser(state) {
+      state.user = { ...INIT_STATE.user };
+      state.isLoggedIn = false;
     },
   },
   actions: {
@@ -23,14 +24,12 @@ export default {
         commit('setLoading', true);
 
         const user = await AuthService.register({ ...payload });
-        const userInfo = { name: payload.username, bill: 10000 };
-        await UserService.updateProfile(user.uid, { ...userInfo });
 
-        commit('setUser', {
-          uid: user.uid,
-          email: user.email,
-          info: { ...userInfo },
-        });
+        const userInfo = { name: payload.username, bill: 10000 };
+        await UserService.updateInfo(user.uid, { ...userInfo });
+
+        commit('setUser', { uid: user.uid, email: user.email });
+        commit('setInfo', { ...userInfo });
       } catch (error) {
         commit('setError', error);
       } finally {
@@ -42,13 +41,7 @@ export default {
         commit('setLoading', true);
 
         const user = await AuthService.login({ ...payload });
-        const userInfo = await UserService.getProfile(user.uid);
-
-        commit('setUser', {
-          uid: user.uid,
-          email: user.email,
-          info: { ...userInfo },
-        });
+        commit('setUser', { uid: user.uid, email: user.email });
       } catch (error) {
         commit('setError', error);
       } finally {
@@ -58,33 +51,13 @@ export default {
     async logout({ commit }) {
       commit('setLoading', true);
       await AuthService.logout();
-      commit('setUser', { ...INIT_STATE.user });
+
+      commit('clearUser');
+      commit('clearInfo');
       commit('setLoading', false);
     },
     async autoLogin({ commit }, payload) {
-      const userInfo = await UserService.getProfile(payload.uid);
-
-      commit('setUser', {
-        uid: payload.uid,
-        email: payload.email,
-        info: { ...userInfo },
-      });
-    },
-    async updateProfile({ commit, getters }, payload) {
-      try {
-        commit('setLoading', true);
-
-        const { uid, info } = getters.user;
-        const userInfo = { ...info, name: payload.username };
-        await UserService.updateProfile(uid, { ...userInfo });
-
-        commit('updateInfo', { ...userInfo });
-      } catch (error) {
-        // commit('setError', error);
-        console.error(error);
-      } finally {
-        commit('setLoading', false);
-      }
+      commit('setUser', { uid: payload.uid, email: payload.email });
     },
   },
   getters: {

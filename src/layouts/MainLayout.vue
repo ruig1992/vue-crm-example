@@ -29,6 +29,11 @@ export default {
   data: () => ({
     isSidebarOpen: true,
   }),
+  async mounted() {
+    if (this.$store.getters.isEmptyInfo) {
+      await this.$store.dispatch('getInfo');
+    }
+  },
   methods: {
     onToggleSidebar() {
       this.isSidebarOpen = !this.isSidebarOpen;
