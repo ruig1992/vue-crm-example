@@ -10,50 +10,23 @@
 
     <div class="row">
       <div class="col s12 m6 l4">
-        <div class="card light-blue bill-card">
-          <div class="card-content white-text">
-            <span class="card-title">Рахунок у валюті</span>
-
-            <p class="currency-line">
-              <span>{{ infoBill | currency() }}</span>
-            </p>
-          </div>
-        </div>
+        <UserBill :billValue="infoBill"/>
       </div>
 
       <div class="col s12 m6 l8">
-        <div class="card orange darken-3 bill-card">
-          <div class="card-content white-text">
-            <div class="card-header">
-              <span class="card-title">Курс валют</span>
-            </div>
-            <table>
-              <thead>
-              <tr>
-                <th>Валюта</th>
-                <th>Курс</th>
-                <th>Дата</th>
-              </tr>
-              </thead>
-
-              <tbody>
-              <tr>
-                <td>грн</td>
-                <td>12121</td>
-                <td>12.12.12</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
+        <ExchangeRate/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import UserBill from '@/components/UserBill.vue';
+import ExchangeRate from '@/components/ExchangeRate.vue';
+
 export default {
   name: 'Home',
+  components: { UserBill, ExchangeRate },
   computed: {
     infoBill() {
       return this.$store.getters.info.bill;
