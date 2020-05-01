@@ -54,7 +54,7 @@ export default {
   },
   computed: {
     isLoading() {
-      return this.$store.state.loading;
+      return this.$store.getters.loading;
     },
     error() {
       return this.$store.getters.error;

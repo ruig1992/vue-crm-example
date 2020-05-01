@@ -56,7 +56,7 @@ export default {
   name: 'Home',
   computed: {
     getUserBillValue() {
-      return this.$store.state.user.info.bill;
+      return this.$store.getters.user.info.bill;
     },
   },
 };
