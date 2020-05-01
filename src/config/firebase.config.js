@@ -1,10 +1,10 @@
 export default {
-  apiKey: 'AIzaSyCYaxi4E-L-3LUTv1BeLDmCUxhGYI9suVY',
-  authDomain: 'vue-crm-loc.firebaseapp.com',
-  databaseURL: 'https://vue-crm-loc.firebaseio.com',
-  projectId: 'vue-crm-loc',
-  storageBucket: 'vue-crm-loc.appspot.com',
-  messagingSenderId: '654120863413',
-  appId: '1:654120863413:web:989b9e71e8fce033a2e0fc',
-  measurementId: 'G-0M6KQ4HL6X',
+  apiKey: process.env.VUE_APP_FIREBASE_API_KEY,
+  authDomain: process.env.VUE_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.VUE_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.VUE_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.VUE_APP_FIREBASE_APP_ID,
+  measurementId: process.env.VUE_APP_FIREBASE_MEASUREMENT_ID,
 };
