@@ -1,5 +1,10 @@
 export default function (value, format = 'date') {
   let options = {};
+  let date = value;
+
+  if (!(value instanceof Date)) {
+    date = new Date(value);
+  }
 
   if (format.includes('date')) {
     options = {
@@ -16,5 +21,5 @@ export default function (value, format = 'date') {
     };
   }
 
-  return new Intl.DateTimeFormat('uk', options).format(value);
+  return new Intl.DateTimeFormat('uk', options).format(date);
 }
