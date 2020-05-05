@@ -2,10 +2,16 @@ const msg = (html, options) => {
   if (!html) {
     return;
   }
+
+  let htmlStr = html;
+  if (options.msg_params) {
+    htmlStr = html.replace(/\{(\d+)\}/g, (all, num) => options.msg_params[num] || all);
+  }
+
   window.M.toast({
     displayLength: 1200,
     ...options,
-    html,
+    html: htmlStr,
   });
 };
 
