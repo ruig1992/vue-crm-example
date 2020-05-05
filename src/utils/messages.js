@@ -12,3 +12,7 @@ export const msgAuth = {
 export const msgCurrency = {
   exchange_rate_err: 'Could not get the latest exchange rate data!',
 };
+
+export const msgBill = {
+  not_enough_money: 'You have not enough money on the bill - {0}!',
+};
