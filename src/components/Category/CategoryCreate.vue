@@ -90,7 +90,7 @@ export default {
         return;
       }
 
-      await this.$store.dispatch('createCategory', {
+      const category = await this.$store.dispatch('createCategory', {
         title: this.title,
         limit: this.limit,
       });
@@ -105,6 +105,9 @@ export default {
       }
       this.title = '';
       this.limit = LIMIT_MIN_VAL;
+      this.$v.$reset();
+
+      this.$emit('create', category);
       this.$notify.show('Категорія успішно додана!');
     },
   },

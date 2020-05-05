@@ -5,21 +5,31 @@
     </div>
 
     <form @submit.prevent="onSubmit">
-      <div class="input-field">
-        <select>
-          <option>Category</option>
+      <div class="input-field" :class="{ invalid: $v.selectedCategory.$error }">
+        <select
+          id="categorySelect"
+          ref="categorySelect"
+          v-model.number="$v.selectedCategory.$model"
+        >
+          <option value="" disabled>Список категорій</option>
+          <option v-for="c in categories" :key="c.id" :value="c.id"
+          >{{ c.title }}</option>
         </select>
-        <label>Виберіть категорію</label>
+        <label for="categorySelect">Виберіть категорію</label>
+        <small
+          class="helper-text invalid"
+          v-if="$v.selectedCategory.$error && !$v.selectedCategory.required"
+        >Select the category</small>
       </div>
 
       <div class="input-field">
         <input
-          id="title"
+          id="title_edit"
           type="text"
           v-model.trim="$v.title.$model"
           :class="{ invalid: $v.title.$error }"
         >
-        <label for="title">Назва</label>
+        <label for="title_edit" :class="{ active: title }">Назва</label>
         <small
           class="helper-text invalid"
           v-if="$v.title.$error && !$v.title.required"
@@ -36,11 +46,12 @@
 
       <div class="input-field">
         <input
-          id="limit"
+          id="limit_edit"
           type="number"
           v-model.number="$v.limit.$model"
+          :class="{ invalid: $v.limit.$error }"
         >
-        <label for="limit" :class="{ 'active': limit }">Ліміт</label>
+        <label for="limit_edit" :class="{ active: limit }">Ліміт</label>
         <small
           class="helper-text invalid"
           v-if="$v.limit.$error && !$v.limit.required"
@@ -70,9 +81,12 @@ const LIMIT_MIN_VAL = 1;
 
 export default {
   name: 'CategoryEdit',
+  props: { categories: { type: Array, required: true } },
   data: () => ({
     title: '',
-    limit: LIMIT_MIN_VAL,
+    limit: null,
+    categorySelect: null,
+    selectedCategory: null,
   }),
   computed: {
     isLoading() {
@@ -82,27 +96,45 @@ export default {
       return this.$store.getters.error;
     },
   },
+  watch: {
+    selectedCategory(catId) {
+      const { title, limit } = this.categories.find((c) => c.id === catId);
+      this.title = title;
+      this.limit = limit;
+    },
+  },
   validations: {
+    selectedCategory: { required },
     title: { required, minLength: minLength(4), alphaNumExtra },
     limit: { required, minValue: minValue(LIMIT_MIN_VAL) },
   },
   mounted() {
-    window.M.updateTextFields();
+    this.initSelect();
+  },
+  beforeDestroy() {
+    this.destroySelect();
   },
   methods: {
+    initSelect() {
+      this.categorySelect = window.M.FormSelect.init(this.$refs.categorySelect);
+    },
+    destroySelect() {
+      if (this.categorySelect && this.categorySelect.destroy) {
+        this.categorySelect.destroy();
+      }
+    },
     async onSubmit() {
       this.$v.$touch();
       if (this.$v.$invalid) {
         return;
       }
 
-      console.log(this.title);
-      console.log(this.limit);
-
-      /* await this.$store.dispatch('createCategory', {
+      const category = {
+        id: this.selectedCategory,
         title: this.title,
         limit: this.limit,
-      });
+      };
+      await this.$store.dispatch('updateCategory', category);
 
       if (this.error.status) {
         this.$notify.error(this.error.code, {
@@ -112,9 +144,13 @@ export default {
         });
         return;
       }
-      this.title = '';
-      this.limit = LIMIT_MIN_VAL;
-      this.$notify.show('Категорія успішно додана!'); */
+
+      this.$emit('update', category);
+      this.$nextTick(() => {
+        this.destroySelect();
+        this.initSelect();
+      });
+      this.$notify.show('Категорія успішно оновлена!');
     },
   },
 };

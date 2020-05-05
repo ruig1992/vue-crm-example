@@ -1,34 +1,49 @@
 import CategoryService from '@/services/category.service';
 
-const INIT_STATE = {
-  categories: {},
-};
-
 export default {
-  state: { ...INIT_STATE },
-  mutations: {
-    setCategories(state, payload) {
-      state.categories = payload;
-    },
-  },
   actions: {
+    async getCategories({ commit, getters }) {
+      try {
+        commit('setLoading', true);
+
+        const { uid } = getters.user;
+        const categories = await CategoryService.getAll(uid);
+
+        return Object.keys(categories).map((key) => (
+          { ...categories[key], id: key }
+        ));
+      } catch (error) {
+        commit('setError', error);
+        return {};
+      } finally {
+        commit('setLoading', false);
+      }
+    },
     async createCategory({ commit, getters }, payload) {
       try {
         commit('setLoading', true);
 
         const { uid } = getters.user;
-        await CategoryService.create(uid, { ...payload });
-        const categories = await CategoryService.getAll(uid);
+        const categoryRef = await CategoryService.create(uid, { ...payload });
+        return { id: categoryRef.key, ...payload };
+      } catch (error) {
+        commit('setError', error);
+        return {};
+      } finally {
+        commit('setLoading', false);
+      }
+    },
+    async updateCategory({ commit, getters }, payload) {
+      try {
+        commit('setLoading', true);
 
-        commit('setCategories', { ...categories });
+        const { uid } = getters.user;
+        await CategoryService.update(uid, { ...payload });
       } catch (error) {
         commit('setError', error);
       } finally {
         commit('setLoading', false);
       }
     },
-  },
-  getters: {
-    categories: (state) => state.categories,
   },
 };

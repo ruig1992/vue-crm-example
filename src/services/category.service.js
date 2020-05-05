@@ -16,9 +16,14 @@ class CategoryService {
   }
 
   static create(uid, data) {
-    const newId = Date.now();
-    firebase.database().ref(`users/${uid}/categories/${newId}`)
-      .set(data);
+    return firebase.database().ref(`users/${uid}/categories`)
+      .push(data);
+  }
+
+  static update(uid, data) {
+    const { title, limit } = data;
+    firebase.database().ref(`users/${uid}/categories/${data.id}`)
+      .set({ title, limit });
   }
 }
 
