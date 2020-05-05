@@ -4,7 +4,7 @@ const msg = (html, options) => {
   }
 
   let htmlStr = html;
-  if (options.msg_params) {
+  if (options && options.msg_params) {
     htmlStr = html.replace(/\{(\d+)\}/g, (all, num) => options.msg_params[num] || all);
   }
 
