@@ -9,7 +9,7 @@
         <select
           id="categorySelect"
           ref="categorySelect"
-          v-model.number="$v.selectedCategory.$model"
+          v-model="$v.selectedCategory.$model"
         >
           <option value="" disabled>Список категорій</option>
           <option v-for="c in categories" :key="c.id" :value="c.id"
