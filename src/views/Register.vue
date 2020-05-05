@@ -101,7 +101,7 @@ import {
 } from 'vuelidate/lib/validators';
 import { msgAuth } from '@/utils/messages';
 
-const alphaNumExtra = (value) => /^[a-zа-яА-ЯєЄіІїЇґҐ\d '’]+$/i.test(value);
+const alphaNumExtra = (value) => /^[a-zа-яА-ЯєЄіІїЇґҐ\d '’-]+$/i.test(value);
 
 export default {
   name: 'Register',
