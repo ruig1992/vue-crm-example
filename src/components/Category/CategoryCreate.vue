@@ -32,8 +32,9 @@
           id="limit"
           type="number"
           v-model.number="$v.limit.$model"
+          :class="{ invalid: $v.limit.$error }"
         >
-        <label for="limit" :class="{ 'active': limit }">Ліміт</label>
+        <label for="limit">Ліміт</label>
         <small
           class="helper-text invalid"
           v-if="$v.limit.$error && !$v.limit.required"
