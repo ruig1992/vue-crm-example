@@ -26,7 +26,7 @@ export default {
         commit('setLoading', true);
 
         const { uid } = getters.user;
-        const userInfo = { ...getters.info, name: payload.name };
+        const userInfo = { ...getters.info, ...payload };
         await UserService.updateInfo(uid, { ...userInfo });
 
         commit('setInfo', { ...userInfo });
