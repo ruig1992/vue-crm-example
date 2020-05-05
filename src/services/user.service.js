@@ -9,7 +9,7 @@ class UserService {
   }
 
   static updateInfo(id, data) {
-    firebase.database().ref(`users/${id}/info`).set(data);
+    firebase.database().ref(`users/${id}/info`).update(data);
   }
 }
 
