@@ -12,9 +12,10 @@
         </div>
       </main>
 
-      <div class="fixed-action-btn">
+      <div class="fixed-action-btn" v-if="this.$route.name !== 'NewRecord'">
         <router-link :to="{ name: 'NewRecord' }"
           class="btn-floating btn-large blue"
+          v-tooltip="'Створити запис'"
         >
           <i class="large material-icons">add</i>
         </router-link>
