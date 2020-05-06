@@ -8,7 +8,7 @@ export default class CategoryService {
 
   static async get(uid, id) {
     return (await firebase.database()
-      .ref(`users/${uid}/categories/${id}`).once('value')).val() || {};
+      .ref(`users/${uid}/categories/${id}`).once('value')).val();
   }
 
   static create(uid, data) {

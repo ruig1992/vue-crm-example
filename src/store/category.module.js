@@ -2,6 +2,21 @@ import CategoryService from '@/services/category.service';
 
 export default {
   actions: {
+    async getCategory({ commit, getters }, payload) {
+      try {
+        commit('setLoading', true);
+
+        const { uid } = getters.user;
+        const category = await CategoryService.get(uid, payload);
+
+        return category ? { ...category, id: payload } : null;
+      } catch (error) {
+        commit('setError', error);
+        return null;
+      } finally {
+        commit('setLoading', false);
+      }
+    },
     async getCategories({ commit, getters }) {
       try {
         commit('setLoading', true);

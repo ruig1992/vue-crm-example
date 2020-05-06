@@ -11,7 +11,7 @@ class RecordService {
 
   static async get(uid, id) {
     return (await firebase.database()
-      .ref(`users/${uid}/records/${id}`).once('value')).val() || {};
+      .ref(`users/${uid}/records/${id}`).once('value')).val();
   }
 
   static create(uid, data) {

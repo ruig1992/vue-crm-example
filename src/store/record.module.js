@@ -2,6 +2,21 @@ import RecordService from '@/services/record.service';
 
 export default {
   actions: {
+    async getRecord({ commit, getters }, payload) {
+      try {
+        commit('setLoading', true);
+
+        const { uid } = getters.user;
+        const record = await RecordService.get(uid, payload);
+
+        return record ? { ...record, id: payload } : null;
+      } catch (error) {
+        commit('setError', error);
+        return null;
+      } finally {
+        commit('setLoading', false);
+      }
+    },
     async getRecords({ commit, getters }) {
       try {
         commit('setLoading', true);
@@ -33,17 +48,5 @@ export default {
         commit('setLoading', false);
       }
     },
-    // async updateCategory({ commit, getters }, payload) {
-    //   try {
-    //     commit('setLoading', true);
-
-    //     const { uid } = getters.user;
-    //     await RecordService.update(uid, { ...payload });
-    //   } catch (error) {
-    //     commit('setError', error);
-    //   } finally {
-    //     commit('setLoading', false);
-    //   }
-    // },
   },
 };
