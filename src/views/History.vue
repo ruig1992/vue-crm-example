@@ -16,6 +16,17 @@
     </p>
 
     <HistoryTable :records="records" v-else />
+
+    <Paginate
+      :page-count="20"
+      :click-handler="onPageChanged"
+      prev-class="waves-effect"
+      prev-text='<i class="material-icons">chevron_left</i>'
+      next-class="waves-effect"
+      next-text='<i class="material-icons">chevron_right</i>'
+      container-class="pagination"
+      page-class="waves-effect"
+    />
   </div>
 </template>
 
@@ -46,6 +57,11 @@ export default {
     });
 
     this.loading = false;
+  },
+  methods: {
+    onPageChanged(p) {
+      console.log(p);
+    },
   },
 };
 </script>
