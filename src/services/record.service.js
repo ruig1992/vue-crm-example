@@ -1,5 +1,8 @@
 import firebase from 'firebase/app';
 
+export const TYPE_INCOME = 'income';
+export const TYPE_OUTCOME = 'outcome';
+
 class RecordService {
   static async getAll(uid) {
     const data = await firebase.database()
