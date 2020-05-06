@@ -12,6 +12,9 @@ export default function (value, format = 'date') {
       month: 'long',
       day: '2-digit',
     };
+    if (format.includes('short')) {
+      options.month = 'numeric';
+    }
   }
   if (format.includes('time')) {
     options = {
