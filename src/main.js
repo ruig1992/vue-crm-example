@@ -14,6 +14,7 @@ import ProgressLoader from './components/app/Loader/Progress.vue';
 
 import formatDate from './filters/date.filter';
 import formatCurrency from './filters/currency.filter';
+import formatNumber from './filters/number.filter';
 import strCase from './filters/str-case.filter';
 import Notification from './utils/notification.utils';
 
@@ -29,6 +30,7 @@ Vue.component('CircularLoader', CircularLoader);
 Vue.component('ProgressLoader', ProgressLoader);
 Vue.filter('date', formatDate);
 Vue.filter('currency', formatCurrency);
+Vue.filter('number', formatNumber);
 Vue.filter('strCase', strCase);
 
 firebase.initializeApp(firebaseConfig);
