@@ -15,7 +15,7 @@
           <strong style="margin-right:10px">{{ c.title }}:</strong>
           {{ c.spend | number }} з {{ c.limit | currency }}
         </p>
-        <div class="progress" >
+        <div class="progress" v-tooltip="c.tooltipText">
           <div
             class="determinate"
             :class="c.progressColor"
@@ -28,6 +28,8 @@
 </template>
 
 <script>
+import { TYPE_OUTCOME } from '@/services/record.service';
+
 export default {
   name: 'Planning',
   data: () => ({
@@ -46,7 +48,7 @@ export default {
     this.categoriesWithSpend = categories.map((c) => {
       /* eslint-disable no-param-reassign */
       const spend = records
-        .filter((r) => r.category_id === c.id && r.type === 'outcome')
+        .filter((r) => r.category_id === c.id && r.type === TYPE_OUTCOME)
         // eslint-disable-next-line no-return-assign
         .reduce((sum, r) => sum += +r.amount, 0);
       /* eslint-enable no-param-reassign */
@@ -59,8 +61,14 @@ export default {
           ? 'yellow'
           : 'red';
 
+      const tooltipValue = c.limit - spend;
+      const valueAsCurrency = this.$options.filters.currency(
+        Math.abs(tooltipValue),
+      );
+      const tooltipText = `${tooltipValue < 0 ? 'Перевищення на' : 'Залишилося'} ${valueAsCurrency}`;
+
       return {
-        ...c, spend, progressPercent, progressColor,
+        ...c, spend, progressPercent, progressColor, tooltipText,
       };
     });
 
