@@ -56,7 +56,7 @@ const routes = [
     meta: { ...metaDefaultLayout, requiresAuth: true },
   },
   {
-    path: '/detail-record',
+    path: '/detail-record/:id',
     name: 'DetailRecord',
     component: () => import('../views/DetailRecord.vue'),
     meta: { ...metaDefaultLayout, requiresAuth: true },
