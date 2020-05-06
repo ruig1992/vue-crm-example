@@ -2,15 +2,15 @@ import RecordService from '@/services/record.service';
 
 export default {
   actions: {
-    /* async getCategories({ commit, getters }) {
+    async getRecords({ commit, getters }) {
       try {
         commit('setLoading', true);
 
         const { uid } = getters.user;
-        const categories = await RecordService.getAll(uid);
+        const records = await RecordService.getAll(uid);
 
-        return Object.keys(categories).map((key) => (
-          { ...categories[key], id: key }
+        return Object.keys(records).map((key) => (
+          { ...records[key], id: key }
         ));
       } catch (error) {
         commit('setError', error);
@@ -18,7 +18,7 @@ export default {
       } finally {
         commit('setLoading', false);
       }
-    }, */
+    },
     async createRecord({ commit, getters }, payload) {
       try {
         commit('setLoading', true);
