@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 
-class AuthService {
+export default class AuthService {
   static async register(user) {
     const userCredential = await firebase.auth()
       .createUserWithEmailAndPassword(user.email, user.password);
@@ -16,7 +16,7 @@ class AuthService {
   }
 
   static logout() {
-    firebase.auth().signOut();
+    return firebase.auth().signOut();
   }
 
   static getCurrentUser() {
@@ -27,5 +27,3 @@ class AuthService {
     return !!this.getCurrentUser();
   }
 }
-
-export default AuthService;

@@ -5,22 +5,17 @@ export const TYPE_OUTCOME = 'outcome';
 
 class RecordService {
   static async getAll(uid) {
-    const data = await firebase.database()
-      .ref(`users/${uid}/records`).once('value');
-
-    return data.val() || {};
+    return (await firebase.database()
+      .ref(`users/${uid}/records`).once('value')).val() || {};
   }
 
   static async get(uid, id) {
-    const data = await firebase.database()
-      .ref(`users/${uid}/records/${id}`).once('value');
-
-    return data.val() || {};
+    return (await firebase.database()
+      .ref(`users/${uid}/records/${id}`).once('value')).val() || {};
   }
 
   static create(uid, data) {
-    return firebase.database().ref(`users/${uid}/records`)
-      .push(data);
+    return firebase.database().ref(`users/${uid}/records`).push(data);
   }
 }
 

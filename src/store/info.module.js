@@ -31,8 +31,7 @@ export default {
 
         commit('setInfo', { ...userInfo });
       } catch (error) {
-        // commit('setError', error);
-        console.error(error);
+        commit('setError', error);
       } finally {
         commit('setLoading', false);
       }

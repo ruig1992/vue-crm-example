@@ -1,5 +1,5 @@
 import config from '@/config/currency.config';
-import { msgCurrency } from '@/utils/messages';
+import msg from '@/utils/messages';
 
 export const userCurrenciesAsArray = config.cur_user_types.split(',');
 
@@ -10,7 +10,7 @@ export async function getExchangeRate() {
   const data = await res.json();
 
   if (!data.success) {
-    data.app_error_msg = msgCurrency.exchange_rate_err;
+    data.app_error_msg = msg.exchange_rate_err;
   }
 
   return data;

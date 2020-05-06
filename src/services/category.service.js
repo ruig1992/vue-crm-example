@@ -1,18 +1,14 @@
 import firebase from 'firebase/app';
 
-class CategoryService {
+export default class CategoryService {
   static async getAll(uid) {
-    const data = await firebase.database()
-      .ref(`users/${uid}/categories`).once('value');
-
-    return data.val() || {};
+    return (await firebase.database()
+      .ref(`users/${uid}/categories`).once('value')).val() || {};
   }
 
   static async get(uid, id) {
-    const data = await firebase.database()
-      .ref(`users/${uid}/categories/${id}`).once('value');
-
-    return data.val() || {};
+    return (await firebase.database()
+      .ref(`users/${uid}/categories/${id}`).once('value')).val() || {};
   }
 
   static create(uid, data) {
@@ -22,9 +18,7 @@ class CategoryService {
 
   static update(uid, data) {
     const { title, limit } = data;
-    firebase.database().ref(`users/${uid}/categories/${data.id}`)
-      .set({ title, limit });
+    return firebase.database().ref(`users/${uid}/categories/${data.id}`)
+      .update({ title, limit });
   }
 }
-
-export default CategoryService;
