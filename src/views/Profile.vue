@@ -74,15 +74,10 @@ export default {
         name: this.name,
       });
 
-      /* if (this.error.status) {
-        this.$notify.error(`(${this.error.code}) ${this.error.message}`);
-
-        this.$notify.error(msgAuth[this.authError.code], {
-          completeCallback: () => {
-            this.$store.dispatch('resetError');
-          },
-        });
-      } */
+      if (this.error.status) {
+        return;
+      }
+      this.$notify.show("Ім'я користувача успішно оновлено!");
     },
   },
 };

@@ -99,7 +99,6 @@
 import {
   required, email, minLength, sameAs,
 } from 'vuelidate/lib/validators';
-import { msgAuth } from '@/utils/messages';
 
 const alphaNumExtra = (value) => /^[a-zа-яА-ЯєЄіІїЇґҐ\d '’-]+$/i.test(value);
 
@@ -140,11 +139,6 @@ export default {
       });
 
       if (this.authError.status) {
-        this.$notify.error(msgAuth[this.authError.code], {
-          completeCallback: () => {
-            this.$store.dispatch('resetError');
-          },
-        });
         return;
       }
 

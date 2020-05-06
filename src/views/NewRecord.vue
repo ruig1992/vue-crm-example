@@ -100,7 +100,7 @@
 <script>
 import { required, minValue } from 'vuelidate/lib/validators';
 import { TYPE_INCOME, TYPE_OUTCOME } from '@/services/record.service';
-import { msgBill } from '@/utils/messages';
+import msgBill from '@/utils/messages';
 
 const LIMIT_MIN_VAL = 1;
 
@@ -192,16 +192,13 @@ export default {
       });
 
       if (this.error.status) {
-        this.$notify.error(this.error.code, {
-          completeCallback: () => {
-            this.$store.dispatch('resetError');
-          },
-        });
         return;
       }
 
       this.resetForm();
-      this.$notify.show(`Запис успішно створений! Ваш поточний рахунок - ${this.bill}`);
+      this.$notify.show(
+        `Запис успішно створений! Ваш поточний рахунок - ${this.bill}`,
+      );
     },
   },
 };

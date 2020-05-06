@@ -96,13 +96,9 @@ export default {
       });
 
       if (this.error.status) {
-        this.$notify.error(this.error.code, {
-          completeCallback: () => {
-            this.$store.dispatch('resetError');
-          },
-        });
         return;
       }
+
       this.title = '';
       this.limit = LIMIT_MIN_VAL;
       this.$v.$reset();

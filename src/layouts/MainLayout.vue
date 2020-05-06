@@ -27,6 +27,7 @@
 <script>
 import Navbar from '@/components/app/Navbar.vue';
 import Sidebar from '@/components/app/Sidebar.vue';
+import msg from '@/utils/messages';
 
 export default {
   name: 'MainLayout',
@@ -35,6 +36,23 @@ export default {
     isSidebarOpen: true,
     loading: true,
   }),
+  computed: {
+    error() {
+      return this.$store.getters.error;
+    },
+  },
+  watch: {
+    error(err) {
+      if (!err.status) {
+        return;
+      }
+      this.$notify.error(msg[err.code] || err.message, {
+        completeCallback: () => {
+          this.$store.dispatch('resetError');
+        },
+      });
+    },
+  },
   async mounted() {
     if (this.$store.getters.isEmptyInfo) {
       await this.$store.dispatch('getInfo');

@@ -137,11 +137,6 @@ export default {
       await this.$store.dispatch('updateCategory', category);
 
       if (this.error.status) {
-        this.$notify.error(this.error.code, {
-          completeCallback: () => {
-            this.$store.dispatch('resetError');
-          },
-        });
         return;
       }
 

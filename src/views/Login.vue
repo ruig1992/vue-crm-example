@@ -59,7 +59,7 @@
 
 <script>
 import { required, email, minLength } from 'vuelidate/lib/validators';
-import { msgAuth } from '@/utils/messages';
+import msgAuth from '@/utils/messages';
 
 export default {
   name: 'Login',
@@ -71,7 +71,7 @@ export default {
     isLoading() {
       return this.$store.getters.loading;
     },
-    authError() {
+    error() {
       return this.$store.getters.error;
     },
   },
@@ -95,12 +95,7 @@ export default {
         password: this.password,
       });
 
-      if (this.authError.status) {
-        this.$notify.error(msgAuth[this.authError.code], {
-          completeCallback: () => {
-            this.$store.dispatch('resetError');
-          },
-        });
+      if (this.error.status) {
         return;
       }
 
