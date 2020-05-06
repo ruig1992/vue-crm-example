@@ -2,19 +2,24 @@
   <div>
     <div class="page-title">
       <h3>Планування</h3>
-      <h4>12 212</h4>
+      <h4>{{ bill | currency }}</h4>
     </div>
 
-    <section>
-      <div>
+    <CircularLoader v-if="loading" />
+
+    <p class="center" v-else-if="!categoriesWithSpend.length">Категорій поки що немає...</p>
+
+    <section v-else>
+      <div v-for="c in categoriesWithSpend" :key="c.id">
         <p>
-          <strong>Дівчина:</strong>
-          12 122 з 140 000
+          <strong style="margin-right:10px">{{ c.title }}:</strong>
+          {{ c.spend | number }} з {{ c.limit | currency }}
         </p>
         <div class="progress" >
           <div
-              class="determinate green"
-              style="width:40%"
+            class="determinate"
+            :class="c.progressColor"
+            :style="{ width: c.progressPercent + '%' }"
           ></div>
         </div>
       </div>
@@ -25,5 +30,41 @@
 <script>
 export default {
   name: 'Planning',
+  data: () => ({
+    categoriesWithSpend: [],
+    loading: true,
+  }),
+  computed: {
+    bill() {
+      return this.$store.getters.info.bill;
+    },
+  },
+  async mounted() {
+    const categories = await this.$store.dispatch('getCategories');
+    const records = await this.$store.dispatch('getRecords');
+
+    this.categoriesWithSpend = categories.map((c) => {
+      /* eslint-disable no-param-reassign */
+      const spend = records
+        .filter((r) => r.category_id === c.id && r.type === 'outcome')
+        // eslint-disable-next-line no-return-assign
+        .reduce((sum, r) => sum += +r.amount, 0);
+      /* eslint-enable no-param-reassign */
+      const percent = (spend / c.limit) * 100;
+      const progressPercent = percent > 100 ? 100 : percent;
+      // eslint-disable-next-line no-nested-ternary
+      const progressColor = percent < 60
+        ? 'green'
+        : percent < 100
+          ? 'yellow'
+          : 'red';
+
+      return {
+        ...c, spend, progressPercent, progressColor,
+      };
+    });
+
+    this.loading = false;
+  },
 };
 </script>
