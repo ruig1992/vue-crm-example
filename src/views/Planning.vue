@@ -7,7 +7,10 @@
 
     <CircularLoader v-if="loading" />
 
-    <p class="center" v-else-if="!categoriesWithSpend.length">Категорій поки що немає...</p>
+    <p class="center" v-else-if="!categoriesWithSpend.length">
+      Категорій поки що немає... Додайте нову
+      <router-link :to="{ name: 'Categories' }">прямо зараз</router-link>
+    </p>
 
     <section v-else>
       <div v-for="c in categoriesWithSpend" :key="c.id">

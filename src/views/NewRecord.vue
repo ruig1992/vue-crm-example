@@ -6,8 +6,8 @@
 
     <CircularLoader v-if="loading" />
     <p class="center" v-else-if="!categories.length">
-      Категорій поки що немає... Додати нову можна
-      <router-link :to="{ name: 'Categories' }">тут</router-link>.
+      Категорій поки що немає... Додайте нову
+      <router-link :to="{ name: 'Categories' }">прямо зараз</router-link>
     </p>
 
     <form class="form" v-else @submit.prevent="onSubmit">
