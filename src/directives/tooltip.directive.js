@@ -1,9 +1,24 @@
 export default {
-  bind(el, binding) {
-    const { value } = binding;
+  bind(el, { value }) {
+    let html = value;
+    let options = {};
 
+    if (typeof value === 'object') {
+      html = value.html;
+      options = { ...value };
+    }
+
+    // https://materializecss.com/tooltips.html
     window.M.Tooltip.init(el, {
-      html: value,
+      html,
+      exitDelay: 0,
+      enterDelay: 200,
+      margin: 5,
+      inDuration: 300,
+      outDuration: 250,
+      position: 'top',
+      transitionMovement: 10,
+      ...options,
     });
   },
   unbind(el) {
