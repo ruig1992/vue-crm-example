@@ -30,7 +30,7 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);
 Vue.use(Notification);
-Vue.component('paginate', Paginate);
+Vue.component('Paginate', Paginate);
 Vue.component('CircularLoader', CircularLoader);
 Vue.component('ProgressLoader', ProgressLoader);
 Vue.filter('date', formatDate);
