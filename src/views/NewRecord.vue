@@ -99,11 +99,10 @@
 
 <script>
 import { required, minValue } from 'vuelidate/lib/validators';
+import { TYPE_INCOME, TYPE_OUTCOME } from '@/services/record.service';
 import { msgBill } from '@/utils/messages';
 
 const LIMIT_MIN_VAL = 1;
-const TYPE_INCOME = 'income';
-const TYPE_OUTCOME = 'outcome';
 
 export default {
   name: 'NewRecord',
