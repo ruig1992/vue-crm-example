@@ -15,10 +15,16 @@
       <router-link :to="{ name: 'NewRecord' }">прямо зараз</router-link>
     </p>
 
-    <HistoryTable :records="records" v-else />
+    <HistoryTable
+      v-else
+      :records="items"
+      :page="page"
+      :per-page="perPageCount"
+    />
 
     <Paginate
-      :page-count="20"
+      v-model="page"
+      :page-count="pageCount"
       :click-handler="onPageChanged"
       prev-class="waves-effect"
       prev-text='<i class="material-icons">chevron_left</i>'
@@ -31,21 +37,23 @@
 </template>
 
 <script>
+import paginationMixin from '@/mixins/pagination.mixin';
 import HistoryTable from '@/components/HistoryTable.vue';
 import { TYPE_INCOME } from '@/services/record.service';
 
 export default {
   name: 'History',
   components: { HistoryTable },
+  mixins: [paginationMixin],
   data: () => ({
     records: [],
     loading: true,
   }),
   async mounted() {
-    const records = await this.$store.dispatch('getRecords');
     const categories = await this.$store.dispatch('getCategories');
+    this.records = await this.$store.dispatch('getRecords');
 
-    this.records = records.map((r) => {
+    this.setupPagination(this.records.map((r) => {
       const categoryTitle = categories.find((c) => c.id === r.category_id)
         .title;
       const typeText = r.type === TYPE_INCOME ? 'Дохід' : 'Витрата';
@@ -54,14 +62,9 @@ export default {
       return {
         ...r, categoryTitle, typeText, typeClass,
       };
-    });
+    }));
 
     this.loading = false;
-  },
-  methods: {
-    onPageChanged(p) {
-      console.log(p);
-    },
   },
 };
 </script>

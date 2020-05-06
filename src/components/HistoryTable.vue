@@ -14,7 +14,7 @@
 
       <tbody>
         <tr v-for="(r, i) in records" :key="r.id">
-          <td>{{ i + 1 }}</td>
+          <td>{{ (i + 1) + (page - 1) * perPage }}</td>
           <td>{{ r.amount | currency }}</td>
           <td>{{ r.date | date('shortdatetime') }}</td>
           <td>{{ r.categoryTitle }}</td>
@@ -42,6 +42,8 @@ export default {
   name: 'HistoryTable',
   props: {
     records: { type: Array, required: true },
+    page: { type: Number, default: 1 },
+    perPage: { type: Number, required: true },
   },
 };
 </script>
