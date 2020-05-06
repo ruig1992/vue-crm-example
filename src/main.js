@@ -16,6 +16,9 @@ import formatDate from './filters/date.filter';
 import formatCurrency from './filters/currency.filter';
 import formatNumber from './filters/number.filter';
 import strCase from './filters/str-case.filter';
+
+import tooltipDirective from './directives/tooltip.directive';
+
 import Notification from './utils/notification.utils';
 
 import firebaseConfig from './config/firebase.config';
@@ -32,6 +35,7 @@ Vue.filter('date', formatDate);
 Vue.filter('currency', formatCurrency);
 Vue.filter('number', formatNumber);
 Vue.filter('strCase', strCase);
+Vue.directive('tooltip', tooltipDirective);
 
 firebase.initializeApp(firebaseConfig);
 
