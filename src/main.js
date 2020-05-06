@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuelidate from 'vuelidate';
+import Paginate from 'vuejs-paginate';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import 'firebase/database';
@@ -29,6 +30,7 @@ Vue.config.productionTip = false;
 
 Vue.use(Vuelidate);
 Vue.use(Notification);
+Vue.component('paginate', Paginate);
 Vue.component('CircularLoader', CircularLoader);
 Vue.component('ProgressLoader', ProgressLoader);
 Vue.filter('date', formatDate);
