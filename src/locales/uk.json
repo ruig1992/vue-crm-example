@@ -9,5 +9,8 @@
     "planning": "Планування",
     "new_record": "Новий запис",
     "categories": "Категорії"
+  },
+  "links": {
+    "create_new_record": "Створити запис"
   }
 }

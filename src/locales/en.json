@@ -9,5 +9,8 @@
     "planning": "Planning",
     "new_record": "New Record",
     "categories": "Categories"
+  },
+  "links": {
+    "create_new_record": "Create a new record"
   }
 }
