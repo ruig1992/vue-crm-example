@@ -1,4 +1,6 @@
-export default function (value, format = 'date', locale = 'uk') {
+import store from '@/store';
+
+export default function (value, format = 'date') {
   let options = {};
   let date = value;
 
@@ -24,5 +26,6 @@ export default function (value, format = 'date', locale = 'uk') {
     };
   }
 
-  return new Intl.DateTimeFormat(locale, options).format(date);
+  return new Intl.DateTimeFormat(store.getters.info.locale, options)
+    .format(date);
 }

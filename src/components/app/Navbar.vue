@@ -5,7 +5,7 @@
         <a href="#" @click.prevent="$emit('toggleSidebar')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{ currentDate | date('datetime', currentLocale) }}</span>
+        <span class="black-text">{{ currentDate | date('datetime') }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
