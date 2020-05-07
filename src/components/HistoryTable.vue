@@ -4,11 +4,11 @@
       <thead>
         <tr>
           <th>#</th>
-          <th>Сума</th>
-          <th>Дата</th>
-          <th>Категорія</th>
-          <th>Тип</th>
-          <th>Відкрити</th>
+          <th>{{ $t('common.thead.amount') }}</th>
+          <th>{{ $t('common.thead.date') }}</th>
+          <th>{{ $t('common.thead.category') }}</th>
+          <th>{{ $t('common.thead.type') }}</th>
+          <th>{{ $t('common.thead.detail') }}</th>
         </tr>
       </thead>
 
@@ -21,7 +21,7 @@
           <td>
             <span class="white-text badge"
               :class="r.typeClass"
-            >{{ r.typeText }}</span>
+            >{{ $t(`common.rt_${r.type}`) }}</span>
           </td>
           <td>
             <router-link

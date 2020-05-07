@@ -17,19 +17,39 @@
     "create_new_record": "Create a new record"
   },
   "headers": {
-    "bill": "Bill balance"
+    "bill": "Bill balance",
+    "history": "Records history"
+  },
+  "common": {
+    "rt_income": "Income",
+    "rt_outcome": "Outcome",
+    "thead": {
+      "amount": "Amount",
+      "category": "Category",
+      "currency": "Currency",
+      "date": "Date",
+      "datetime": "Date, time",
+      "detail": "Detail",
+      "rate": "Rate",
+      "type": "Type"
+    }
+  },
+  "messages": {
+    "no_data": {
+      "msg": "No @:messages.no_data.type.records yet... | No @:messages.no_data.type.categories yet...",
+      "msg_create": "Create a new one right now",
+      "type": {
+        "categories": "categories",
+        "records": "records"
+      }
+    }
   },
   "components": {
     "user_bill": {
       "title": "Bill in currencies"
     },
     "exchange_rate": {
-      "title": "Exchange rate",
-      "thead": {
-        "currency": "Currency",
-        "rate": "Rate",
-        "datetime": "Date, time"
-      }
+      "title": "Exchange rate"
     }
   }
 }

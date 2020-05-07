@@ -17,19 +17,39 @@
     "create_new_record": "Створити запис"
   },
   "headers": {
-    "bill": "Стан рахунку"
+    "bill": "Стан рахунку",
+    "history": "Історія записів"
+  },
+  "common": {
+    "rt_income": "Дохід",
+    "rt_outcome": "Витрата",
+    "thead": {
+      "amount": "Сума",
+      "category": "Категорія",
+      "currency": "Валюта",
+      "date": "Дата",
+      "datetime": "Дата, час",
+      "detail": "Детальніше",
+      "rate": "Курс",
+      "type": "Тип"
+    }
+  },
+  "messages": {
+    "no_data": {
+      "msg": "@:messages.no_data.type.records поки що немає... | @:messages.no_data.type.categories поки що немає...",
+      "msg_create": "Створіть прямо зараз",
+      "type": {
+        "categories": "Категорій",
+        "records": "Записів"
+      }
+    }
   },
   "components": {
     "user_bill": {
       "title": "Рахунок у валюті"
     },
     "exchange_rate": {
-      "title": "Курс валют",
-      "thead": {
-        "currency": "Валюта",
-        "rate": "Курс",
-        "datetime": "Дата, час"
-      }
+      "title": "Курс валют"
     }
   }
 }

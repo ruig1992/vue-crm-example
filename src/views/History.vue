@@ -1,38 +1,41 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Історія записів</h3>
-    </div>
-
-    <div class="history-chart" v-if="!loading">
-      <HistoryChart :data="chartData" :options="chartOptions" />
+      <h3>{{ $t('headers.history') }}</h3>
     </div>
 
     <CircularLoader v-if="loading" />
 
     <p class="center" v-else-if="!records.length">
-      Записів поки що немає... Додайте новий
-      <router-link :to="{ name: 'NewRecord' }">прямо зараз</router-link>
+      {{ $tc('messages.no_data.msg', 1) }}
+      <router-link :to="{ name: 'NewRecord' }">
+        {{ $t('messages.no_data.msg_create') }}</router-link>
     </p>
 
-    <HistoryTable
-      v-else
-      :records="items"
-      :page="page"
-      :per-page="perPageCount"
-    />
+    <div v-else>
+      <div class="history-chart">
+        <HistoryChart :data="chartData" :options="chartOptions" />
+      </div>
 
-    <Paginate
-      v-model="page"
-      :page-count="pageCount"
-      :click-handler="onPageChanged"
-      prev-class="waves-effect"
-      prev-text='<i class="material-icons">chevron_left</i>'
-      next-class="waves-effect"
-      next-text='<i class="material-icons">chevron_right</i>'
-      container-class="pagination"
-      page-class="waves-effect"
-    />
+      <HistoryTable
+        :records="items"
+        :page="page"
+        :per-page="perPageCount"
+        :key="locale"
+      />
+
+      <Paginate
+        v-model="page"
+        :page-count="pageCount"
+        :click-handler="onPageChanged"
+        prev-class="waves-effect"
+        prev-text='<i class="material-icons">chevron_left</i>'
+        next-class="waves-effect"
+        next-text='<i class="material-icons">chevron_right</i>'
+        container-class="pagination"
+        page-class="waves-effect"
+      />
+    </div>
   </div>
 </template>
 
@@ -54,6 +57,11 @@ export default {
     chartData: null,
     chartOptions: null,
   }),
+  computed: {
+    locale() {
+      return this.$store.getters.info.locale;
+    },
+  },
   async mounted() {
     const categories = await this.$store.dispatch('getCategories');
     this.records = await this.$store.dispatch('getRecords');
@@ -66,7 +74,6 @@ export default {
       this.chartData = {
         labels: categories.map((c) => c.title),
         datasets: [{
-          label: 'Витрати за категоріями',
           /* eslint-disable */
           data: categories.map((c) => this.records
             .reduce((sum, r) => {
@@ -100,11 +107,10 @@ export default {
       this.setupPagination(this.records.map((r) => {
         const categoryTitle = categories.find((c) => c.id === r.category_id)
           .title;
-        const typeText = r.type === TYPE_OUTCOME ? 'Витрата' : 'Дохід';
         const typeClass = r.type === TYPE_OUTCOME ? 'red' : 'green';
 
         return {
-          ...r, categoryTitle, typeText, typeClass,
+          ...r, categoryTitle, typeClass,
         };
       }));
     },
