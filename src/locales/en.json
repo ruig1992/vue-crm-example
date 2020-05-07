@@ -10,7 +10,26 @@
     "new_record": "New Record",
     "categories": "Categories"
   },
+  "buttons": {
+    "refresh_rate": "Refresh the rate data"
+  },
   "links": {
     "create_new_record": "Create a new record"
+  },
+  "headers": {
+    "bill": "Bill balance"
+  },
+  "components": {
+    "user_bill": {
+      "title": "Bill in currencies"
+    },
+    "exchange_rate": {
+      "title": "Exchange rate",
+      "thead": {
+        "currency": "Currency",
+        "rate": "Rate",
+        "datetime": "Date, time"
+      }
+    }
   }
 }

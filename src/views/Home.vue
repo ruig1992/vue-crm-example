@@ -1,12 +1,14 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Рахунок</h3>
+      <h3>{{ $t('headers.bill') }}</h3>
 
       <button
         class="btn waves-effect waves-light btn-small"
         @click="getExchangeRate"
         :disabled="!isRatesLoaded"
+        :key="locale + '1'"
+        v-tooltip="{ html: $t('buttons.refresh_rate'), position: 'left' }"
       >
         <i class="material-icons">refresh</i>
       </button>
@@ -16,11 +18,11 @@
 
     <div v-else class="row">
       <div class="col s12 m6 l4">
-        <UserBill :rates="rates" />
+        <UserBill :rates="rates" :key="locale + '2'" />
       </div>
 
       <div class="col s12 m6 l8">
-        <ExchangeRate :data="exchangeRateData" />
+        <ExchangeRate :data="exchangeRateData" :key="locale + '3'" />
       </div>
     </div>
   </div>
@@ -41,6 +43,9 @@ export default {
   computed: {
     rates() {
       return this.exchangeRateData.rates || {};
+    },
+    locale() {
+      return this.$store.getters.info.locale;
     },
   },
   async mounted() {

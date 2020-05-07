@@ -10,7 +10,26 @@
     "new_record": "Новий запис",
     "categories": "Категорії"
   },
+  "buttons": {
+    "refresh_rate": "Оновити дані курсу"
+  },
   "links": {
     "create_new_record": "Створити запис"
+  },
+  "headers": {
+    "bill": "Стан рахунку"
+  },
+  "components": {
+    "user_bill": {
+      "title": "Рахунок у валюті"
+    },
+    "exchange_rate": {
+      "title": "Курс валют",
+      "thead": {
+        "currency": "Валюта",
+        "rate": "Курс",
+        "datetime": "Дата, час"
+      }
+    }
   }
 }

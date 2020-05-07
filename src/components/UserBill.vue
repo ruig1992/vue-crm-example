@@ -1,7 +1,7 @@
 <template>
   <div class="card light-blue">
     <div class="card-content white-text">
-      <span class="card-title">Рахунок у валюті</span>
+      <span class="card-title">{{ $t('components.user_bill.title') }}</span>
 
       <p class="currency-line" v-for="cur in currencies" :key="cur">
         <span>{{ getCurrency(cur) | currency(cur) }}</span>
