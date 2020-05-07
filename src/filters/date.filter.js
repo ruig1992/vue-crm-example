@@ -1,4 +1,4 @@
-export default function (value, format = 'date') {
+export default function (value, format = 'date', locale = 'uk') {
   let options = {};
   let date = value;
 
@@ -24,5 +24,5 @@ export default function (value, format = 'date') {
     };
   }
 
-  return new Intl.DateTimeFormat('uk', options).format(date);
+  return new Intl.DateTimeFormat(locale, options).format(date);
 }
