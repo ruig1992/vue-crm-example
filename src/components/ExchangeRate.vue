@@ -8,9 +8,9 @@
       <table>
         <thead>
           <tr>
-            <th>{{ $t('components.exchange_rate.thead.currency') }}</th>
-            <th>{{ $t('components.exchange_rate.thead.rate') }}</th>
-            <th>{{ $t('components.exchange_rate.thead.datetime') }}</th>
+            <th>{{ $t('common.thead.currency') }}</th>
+            <th>{{ $t('common.thead.rate') }}</th>
+            <th>{{ $t('common.thead.datetime') }}</th>
           </tr>
         </thead>
 
