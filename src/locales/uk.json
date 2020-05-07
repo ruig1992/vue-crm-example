@@ -18,7 +18,8 @@
   },
   "headers": {
     "bill": "Стан рахунку",
-    "history": "Історія записів"
+    "history": "Історія записів",
+    "planning": "Планування"
   },
   "common": {
     "rt_income": "Дохід",
@@ -50,6 +51,10 @@
     },
     "exchange_rate": {
       "title": "Курс валют"
+    },
+    "planning": {
+      "spend_of": "з",
+      "progress_msg": "Перевищення на {value} | Залишилося {value}"
     }
   }
 }

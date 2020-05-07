@@ -18,7 +18,8 @@
   },
   "headers": {
     "bill": "Bill balance",
-    "history": "Records history"
+    "history": "Records history",
+    "planning": "Planning"
   },
   "common": {
     "rt_income": "Income",
@@ -50,6 +51,10 @@
     },
     "exchange_rate": {
       "title": "Exchange rate"
+    },
+    "planning": {
+      "spend_of": "of",
+      "progress_msg": "Excess for {value} | {value} left"
     }
   }
 }

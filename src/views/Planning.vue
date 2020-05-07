@@ -1,24 +1,29 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Планування</h3>
+      <h3>{{ $t('headers.planning') }}</h3>
       <h4>{{ bill | currency }}</h4>
     </div>
 
     <CircularLoader v-if="loading" />
 
     <p class="center" v-else-if="!categoriesWithSpend.length">
-      Категорій поки що немає... Додайте нову
-      <router-link :to="{ name: 'Categories' }">прямо зараз</router-link>
+      {{ $tc('messages.no_data.msg', 2) }}
+      <router-link :to="{ name: 'Categories' }">
+        {{ $t('messages.no_data.msg_create') }}</router-link>
     </p>
 
     <section v-else>
       <div v-for="c in categoriesWithSpend" :key="c.id">
         <p>
           <strong style="margin-right:10px">{{ c.title }}:</strong>
-          {{ c.spend | number }} з {{ c.limit | currency }}
+          {{ c.spend | number }}
+          {{ $t('components.planning.spend_of') }}
+          {{ c.limit | currency }}
         </p>
-        <div class="progress" v-tooltip="c.tooltipText">
+        <div class="progress"
+          v-tooltip="$tc('components.planning.progress_msg', c.tpType, { value: c.tpValue })"
+        >
           <div
             class="determinate"
             :class="c.progressColor"
@@ -43,6 +48,9 @@ export default {
     bill() {
       return this.$store.getters.info.bill;
     },
+    locale() {
+      return this.$store.getters.info.locale;
+    },
   },
   async mounted() {
     const categories = await this.$store.dispatch('getCategories');
@@ -64,14 +72,14 @@ export default {
           ? 'yellow'
           : 'red';
 
-      const tooltipValue = c.limit - spend;
-      const valueAsCurrency = this.$options.filters.currency(
-        Math.abs(tooltipValue),
+      const left = c.limit - spend;
+      const tpValue = this.$options.filters.currency(
+        Math.abs(left),
       );
-      const tooltipText = `${tooltipValue < 0 ? 'Перевищення на' : 'Залишилося'} ${valueAsCurrency}`;
+      const tpType = left < 0 ? 1 : 2;
 
       return {
-        ...c, spend, progressPercent, progressColor, tooltipText,
+        ...c, spend, progressPercent, progressColor, tpValue, tpType,
       };
     });
 
