@@ -1,3 +1,6 @@
 {
-  "message": "Вітаю i18n !!"
+  "app_navbar": {
+    "profile": "Профіль",
+    "logout": "Вийти"
+  }
 }

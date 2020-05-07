@@ -5,7 +5,7 @@
         <a href="#" @click.prevent="$emit('toggleSidebar')">
           <i class="material-icons black-text">dehaze</i>
         </a>
-        <span class="black-text">{{ currentDate | date('datetime') }}</span>
+        <span class="black-text">{{ currentDate | date('datetime', currentLocale) }}</span>
       </div>
 
       <ul class="right hide-on-small-and-down">
@@ -15,7 +15,7 @@
             data-target="dropdown_locales"
             ref="dropdownLocalesTrigger"
           >
-            {{ $i18n.locale | strCase }}
+            {{ currentLocale | strCase }}
             <i class="material-icons right">arrow_drop_down</i>
           </a>
 
@@ -43,13 +43,15 @@
           <ul id="dropdown" class="dropdown-content">
             <li>
               <router-link :to="{ name: 'Profile' }" class="black-text">
-                <i class="material-icons">account_circle</i>Профіль
+                <i class="material-icons">account_circle</i>
+                {{ $t('app_navbar.profile') }}
               </router-link>
             </li>
             <li class="divider" tabindex="-1"></li>
             <li>
               <a href="#" class="black-text" @click.prevent="logout">
-                <i class="material-icons">assignment_return</i>Вийти
+                <i class="material-icons">assignment_return</i>
+                {{ $t('app_navbar.logout') }}
               </a>
             </li>
           </ul>
@@ -72,6 +74,9 @@ export default {
     locales: config.locales,
   }),
   computed: {
+    currentLocale() {
+      return this.$i18n.locale;
+    },
     userName() {
       return this.$store.getters.info.name;
     },
