@@ -2,5 +2,12 @@
   "app_navbar": {
     "profile": "Профіль",
     "logout": "Вийти"
+  },
+  "app_sidebar": {
+    "bill": "Рахунок",
+    "history": "Історія",
+    "planning": "Планування",
+    "new_record": "Новий запис",
+    "categories": "Категорії"
   }
 }

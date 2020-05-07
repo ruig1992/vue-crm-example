@@ -4,7 +4,7 @@
 
     <div v-else class="app-main-layout">
       <Navbar @toggleSidebar="onToggleSidebar" />
-      <Sidebar :isOpen="isSidebarOpen" />
+      <Sidebar :isOpen="isSidebarOpen" :key="$i18n.locale" />
 
       <main class="app-content" :class="{ full: !isSidebarOpen }">
         <div class="app-page">

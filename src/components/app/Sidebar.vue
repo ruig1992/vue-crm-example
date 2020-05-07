@@ -7,8 +7,7 @@
       active-class="active"
       exact
     >
-      <a href="#" class="waves-effect waves-orange pointer">
-        {{ link.name }}</a>
+      <a href="#" class="waves-effect waves-orange pointer">{{ link.name }}</a>
     </router-link>
   </ul>
 </template>
@@ -16,35 +15,32 @@
 <script>
 export default {
   name: 'Sidebar',
-  props: {
-    isOpen: {
-      type: Boolean,
-      default: true,
-    },
+  props: { isOpen: { type: Boolean, default: true } },
+  data() {
+    return {
+      links: [
+        {
+          name: this.$t('app_sidebar.bill'),
+          routeTo: { name: 'Home' },
+        },
+        {
+          name: this.$t('app_sidebar.history'),
+          routeTo: { name: 'History' },
+        },
+        {
+          name: this.$t('app_sidebar.planning'),
+          routeTo: { name: 'Planning' },
+        },
+        {
+          name: this.$t('app_sidebar.new_record'),
+          routeTo: { name: 'NewRecord' },
+        },
+        {
+          name: this.$t('app_sidebar.categories'),
+          routeTo: { name: 'Categories' },
+        },
+      ],
+    };
   },
-  data: () => ({
-    links: [
-      {
-        name: 'Рахунок',
-        routeTo: { name: 'Home' },
-      },
-      {
-        name: 'Історія',
-        routeTo: { name: 'History' },
-      },
-      {
-        name: 'Планування',
-        routeTo: { name: 'Planning' },
-      },
-      {
-        name: 'Новий запис',
-        routeTo: { name: 'NewRecord' },
-      },
-      {
-        name: 'Категорії',
-        routeTo: { name: 'Categories' },
-      },
-    ],
-  }),
 };
 </script>
