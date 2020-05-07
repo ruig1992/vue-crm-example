@@ -2,6 +2,7 @@
   <div>
     <div class="page-title">
       <h3>Рахунок</h3>
+      <p>{{ $t('message') }}</p>
 
       <button
         class="btn waves-effect waves-light btn-small"

@@ -36,6 +36,17 @@ export default {
         commit('setLoading', false);
       }
     },
+    async changeLocale({ commit, getters }, locale) {
+      try {
+        const { uid } = getters.user;
+        const userInfo = { ...getters.info, locale };
+        await UserService.updateInfo(uid, { ...userInfo });
+
+        commit('setInfo', { ...userInfo });
+      } catch (error) {
+        commit('setError', error);
+      }
+    },
   },
   getters: {
     info: (state) => state.info,

@@ -9,6 +9,7 @@ import App from './App.vue';
 import './registerServiceWorker';
 import router from './router';
 import store from './store';
+import i18n from './i18n';
 
 import CircularLoader from './components/app/Loader/Circular.vue';
 import ProgressLoader from './components/app/Loader/Progress.vue';
@@ -45,6 +46,7 @@ const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
   new Vue({
     router,
     store,
+    i18n,
     render: (h) => h(App),
     async created() {
       if (user) {

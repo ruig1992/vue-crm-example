@@ -40,6 +40,9 @@ export default {
     error() {
       return this.$store.getters.error;
     },
+    locale() {
+      return this.$store.getters.info.locale;
+    },
   },
   watch: {
     error(err) {
@@ -56,6 +59,7 @@ export default {
   async mounted() {
     if (this.$store.getters.isEmptyInfo) {
       await this.$store.dispatch('getInfo');
+      this.$i18n.locale = this.locale;
     }
     this.loading = false;
   },
