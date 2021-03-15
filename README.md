@@ -1,8 +1,13 @@
-# vue-crm-example
+# Vue CRM example (used Firebase)
 
 ## Project setup
 ```
 npm install
+```
+
+### Create .env.local and set necessary variables
+```
+cp .env.local.example .env.local
 ```
 
 ### Compiles and hot-reloads for development
