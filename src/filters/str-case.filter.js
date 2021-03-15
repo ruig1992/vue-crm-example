@@ -1,4 +1,3 @@
-
 export default function (value, type = 'upper') {
   if (!value) {
     return null;
