@@ -1,13 +1,14 @@
 <template>
   <div>
     <div class="page-title">
-      <h3>Новий запис</h3>
+      <h3>{{ $t('headers.new_record') }}</h3>
     </div>
 
     <CircularLoader v-if="loading" />
     <p class="center" v-else-if="!categories.length">
-      Категорій поки що немає... Додайте нову
-      <router-link :to="{ name: 'Categories' }">прямо зараз</router-link>
+      {{ $tc('messages.no_data.msg', 2) }}
+      <router-link :to="{ name: 'Categories' }">
+        {{ $t('messages.no_data.msg_create') }}</router-link>
     </p>
 
     <form class="form" v-else @submit.prevent="onSubmit">
@@ -17,15 +18,15 @@
           ref="categorySelect"
           v-model="$v.category.$model"
         >
-          <option value="" disabled>Список категорій</option>
+          <option value="" disabled></option>
           <option v-for="c in categories" :key="c.id" :value="c.id"
           >{{ c.title }}</option>
         </select>
-        <label for="categorySelect">Виберіть категорію</label>
+        <label for="categorySelect">{{ $t('form.select.category.label') }}</label>
         <small
           class="helper-text invalid"
           v-if="$v.category.$error && !$v.category.required"
-        >Select the category</small>
+        >{{ $t('form.select.category.err.required') }}</small>
       </div>
 
       <p>
@@ -37,7 +38,7 @@
             value="income"
             v-model="type"
           />
-          <span>Дохід</span>
+          <span>{{ $t('common.rt_income') }}</span>
         </label>
       </p>
 
@@ -50,11 +51,11 @@
             value="outcome"
             v-model="type"
           />
-          <span>Витрата</span>
+          <span>{{ $t('common.rt_outcome') }}</span>
         </label>
       </p>
 
-      <div class="input-field">
+      <div class="input-field" style="margin-top:2.5rem">
         <input
           id="amount"
           type="number"

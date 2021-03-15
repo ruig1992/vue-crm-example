@@ -19,7 +19,8 @@
   "headers": {
     "bill": "Bill balance",
     "history": "Records history",
-    "planning": "Planning"
+    "planning": "Planning",
+    "new_record": "New record"
   },
   "common": {
     "rt_income": "Income",
@@ -55,6 +56,16 @@
     "planning": {
       "spend_of": "of",
       "progress_msg": "Excess for {value} | {value} left"
+    }
+  },
+  "form": {
+    "select": {
+      "category": {
+        "label": "Select the category",
+        "err": {
+          "required": "You have not selected a category"
+        }
+      }
     }
   }
 }

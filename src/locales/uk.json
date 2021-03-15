@@ -19,7 +19,8 @@
   "headers": {
     "bill": "Стан рахунку",
     "history": "Історія записів",
-    "planning": "Планування"
+    "planning": "Планування",
+    "new_record": "Новий запис"
   },
   "common": {
     "rt_income": "Дохід",
@@ -55,6 +56,16 @@
     "planning": {
       "spend_of": "з",
       "progress_msg": "Перевищення на {value} | Залишилося {value}"
+    }
+  },
+  "form": {
+    "select": {
+      "category": {
+        "label": "Виберіть категорію",
+        "err": {
+          "required": "Ви не вибрали категорію"
+        }
+      }
     }
   }
 }
